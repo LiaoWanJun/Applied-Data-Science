@@ -1,0 +1,37 @@
+2020/11/20(五), 109學年第一學期 資料科學應用 R小考(1)
+
+學號:A107260207        姓名:廖婉君 
+
+# (請依照規定)貼上執行程式碼及執行結果。
+詳見: R程式作業繳交方式
+http://www.hmwu.idv.tw/web/teaching/doc/R-how-homework.pdf
+
+#ex1(a)
+library(readxl)
+Rscore <- read_excel("Calculus-score-A.csv", skip=1)
+head(Rscore, 5)
+tail(Rscore, 5)
+str(Rscore)
+colnames(Rscore) <- c("no", "grade", "id", "name", 
+                      "quiz1", "quiz2", "quiz3", "hw", "final", "attend")
+Rscore$id <- as.factor(Rscore$id)
+str(Rscore)
+score[38:43,] 
+   No       ID   Name Gender Quiz1 Quiz2 Quiz3 Quiz4   TA Midterm Final ATT Class 
+38 38 404550431 沈泓霏   女   15     25    53    67  93.3      29  42     9   A 
+39 39 404550442 許安霏   女   53     60    80    72 100.0      61  62     9   A 
+40 40 404550453 李政宜   男   80    100    85   100 100.0      95 100     3   A 
+41 1  404550465 史文羽   男   60     81   100    97 100.0      90  83     6   B 
+42 2  404685071 鄭樺妤   男   80    100   100    92 100.0      92  97     2   B 
+43 3  404685084 張敬安   男   10     40    62    93 100.0      65  84     9   B 
+
+#ex1(e)
+average <- (score02$final + score02$mid)/2
+score02$average <- average
+score02[order(average, decreasing=T),]
+
+#ex2(a)
+set.seed(123456) 
+Letters.code <- sample(LETTERS[1:5], 20, replace=T)
+my_ratio_lsd(score)
+Letters.code
