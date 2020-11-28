@@ -1,0 +1,74 @@
+#2020/11/20(五), 109學年第一學期 資料科學應用 R小考(1)
+
+#學號:A107260207        姓名:廖婉君 
+
+#ex1(a)
+scoreA <- read.csv("exam/Calculus-score-A.csv", skip=2)
+head(scoreA, 5)
+tail(scoreA, 5)
+str(scoreA)
+
+library(readxl)
+
+scoreB <- read_excel("exam/Calculus-score-B.xls", skip=2)
+head(scoreB, 5)
+tail(scoreB, 5)
+str(scoreB)
+
+names(scoreB) <- names(scoreA)
+names(scoreB) <- names(scoreA)
+score <- rbind(scoreA, scoreB)
+names(score) <- c("No", "ID", "Name", "Gender",
+                  "Quiz1", "Quiz2", "Quiz3", "Quiz4",
+                  "TA", "Midterm", "Final", "ATT", "Class")
+score[38:43, ]
+
+#ex1(b)
+head(score[, 5:11])
+exam.score <- score[, 5:11]
+exam.score[is.na(exam.score)] <- 0
+ratio <- c(0.07, 0.07, 0.08, 0.08,0.15, 0.25, 0.30)
+total <- as.matrix(exam.score) %*% as.vector(ratio)
+
+#ex1(c)
+id1 <- which((55 <= total. final) & (total.final < 60))
+score[id1, ]
+
+#ex1(d)
+tapply(total. final, score$Class, mean)
+tapply(total. final, score$Gender, mean)
+
+#ex1(f)
+noA <- nrow(scoreA)
+noA.fail <- length(which((total. final < 60) & (score$Class == "A")))
+noA.fail/noA
+
+noB <- nrow(scoreB)
+noB. M. fail <- length(which((total. final < 60) & 
+                              (score$Class == "B") & 
+                              (score$Gender == "男")))
+noB.fail/noB
+# A 班學期成績不及格比例為多少? B 班男同學學期成績不及格比例為多少?
+
+#ex1(f)
+id.m <- which[score$Gender == "男"]
+id.f <- which[score$Gender == "女"]
+total. final total. final[score$Gender == "男"]
+score.m <- score[id. m, ]
+score.f <- score[id. f, ]
+total.final.m <- total. final[id. m]
+total.final.f <- total. final[id. f]
+
+o.m <- order(total. final. m, decreasing = T)
+o.f <- order(total. final. f, decreasing = T)
+
+#ex2(a)
+set.seed(123456)
+Letters.code <- sample(LETTERS[1:5], 20, replace = T)
+Numbers.code <- ifelse(Letters.code %in% c("A", "E"), 1,
+                       ifelse(Letters.code == "C", 2, 3))
+Numbers.code
+
+#ex2(b)
+data.frame(Letters.code, Numbers.code)
+
