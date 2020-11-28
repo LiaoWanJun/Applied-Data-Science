@@ -1,0 +1,91 @@
+2020/11/13(五), 109學年第一學期 資料科學應用 R作業(3)
+
+學號:A107260207        姓名:廖婉君 
+
+# ex1.25(a)
+library(readxl)
+Rscore <- read_excel("data/R-score.xlsx", skip=1)
+names(Rscore)[5:10] <- c("小考 1", "小考 2", "小考 3", "作業",
+                         "期末考", "點名")
+head(Rscore, 5)
+tail(Rscore, 5)
+
+# ex1.25(b)
+apply(Rscore[, 5:9], 2, mean)
+apply(Rscore[, 5:9], 2, sd)
+#課堂解答# <- ex1.25(b)
+Rscore.exam <- Rscore[,5:ncol(Rscore)]
+names(Rscore.exam) <- c("小考 1", "小考 2", "小考 3", "作業",
+                        "期末考", "點名")
+apply(Rscore.exam[, -6], 2, mean)
+apply(Rscore.exam[, -6], 2, sd)
+
+# ex1.25(c)
+Rscore$total <- c(as.matrix(Rscore[, 5:9])%*% as.vector(c(0.1, 0.15, 0.15, 0.2, 0.4)))
+data.frame(Rscore$No, Rscore$total)
+#課堂解答# <- ex1.25(c)
+ratio <- c(0.1, 0.15, 0.15, 0.2, 0.4)
+total.score <- as.matrix(Rscore.exam[, -6])%*% as.vector(ratio)
+data.frame(Rscore[,3], total. score)
+
+# ex1.29(a)
+library(readxl)
+Rscore <- read_excel("data/R-score.xlsx", skip=1)
+head(Rscore, 5)
+tail(Rscore, 5)
+str(Rscore)
+colnames(Rscore) <- c("no", "grade", "id", "name", 
+                      "quiz1", "quiz2", "quiz3", "hw", "final", "attend")
+Rscore$id <- as.factor(Rscore$id)
+str(Rscore)
+
+# ex1.29(b)
+weather <- read.table("data/20140714-weather.txt", header=T, sep="\t")
+head(weather, 5)
+tail(weather, 5)
+str(weather)
+
+# ex1.29(c)
+delays14 <- read.csv("data/weather_delays14.csv")
+head(delays14, 5)
+tail(delays14, 5)
+str(delays14)
+
+# ex2.10
+score <- sample(1:100, 50, replace = TRUE)
+ifelse(any(score > 95, "老師請同學吃飯", "老師很生氣"))
+#課堂解答# <- ex2.10
+#    判別此資料中是否有高於 95 分的同學，若有，印出「老師請同學吃飯」，
+#    若沒有印 出「老師很生氣」
+score <- sample(1:100, 50, replace = TRUE)
+ifelse(score > 65, "老師請同學吃飯", "老師很生氣")
+
+# ex2.21(a)
+score02 <- read.csv("data/score02.csv")
+head(score02)
+
+# ex2.21(b)
+names(score02) <- c("id", "mid", "final")
+
+# ex2.21(c)
+score02$id[score02$final > score02$mid]
+
+# ex2.21(d)
+score.table <- table(score02$mid >= 60, score02$final >= 60)
+dimnames(score.table) <- list(mid=c("fail", "pass"), final=c("fail", "pass"))
+score.table
+#課堂解答# <- ex2.21(d)
+pass.fail.table <- table(score02$mid >= 60, score02$final >= 60)
+dimnames(pass.fail.table) <- list(期中=c("不及格", "及格"),
+                                  期末=c("不及格", "及格"))
+   #將期中及期末成績，各分成及格和不及格
+
+# ex2.21(e)
+average <- (score02$final + score02$mid)/2
+score02$average <- average
+score02[order(average, decreasing=T),]
+#課堂解答# <- ex2.21(e)
+average <- (score02$mid + score02$final)/2
+score02$average <- average
+o <- order(average, decreasing=T)
+score02[o, ]
