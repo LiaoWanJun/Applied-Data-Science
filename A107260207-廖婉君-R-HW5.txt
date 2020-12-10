@@ -1,0 +1,42 @@
+2020/12/04(五), 109學年第一學期 資料科學應用 R作業(5)
+
+學號:A107260207        姓名:廖婉君 
+  
+  # (請依照規定)貼上執行程式碼及執行結果。
+  詳見: R程式作業繳交方式
+http://www.hmwu.idv.tw/web/teaching/doc/R-how-homework.pdf
+
+# ex2.4(a)
+
+# 利用雙迴圈 for，印出下列圖形。 
+
+for(i in 1:5){
+  + x.name <- paste("x", i, sep=".")
+  + assign(x.name, 1:i)
+  + cat(x.name, ": \t")
+  + cat(get(x.name), "\n")
+  +}
+x.1 : 1
+x.2 : 1 2
+x.3 : 1 2 3
+x.4 : 1 2 3 4
+x.5 : 1 2 3 4 5 
+
+# ex2.4(b)
+else if(x==5){
+  cat("         1           \n")
+  cat("        333          \n")
+  cat("       55555         \n")
+  cat("      7777777        \n")
+  cat("     999999999       \n")
+}
+
+
+# 2.50
+# 某公路經過 A,B,··· ,G 七個城市，各城市離出口之里
+# 程數依序為 25, 49, 95, 178, 264, 327, 373(公里)。
+# 現在要訂公車票價，規則如下
+
+e <- scan()
+e.mat <- matrix(e, ncol=3, byrow=TRUE)
+e.mat
